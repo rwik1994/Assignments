@@ -1,7 +1,7 @@
 class RepeatedSubstrings():
     def decompress(self,compressed):
         repeats = compressed.split('&')
-        #print repeats
+        print repeats
         decom=""
         decompressed=""
         temp=""
@@ -9,15 +9,20 @@ class RepeatedSubstrings():
             if i!="" and repeats[repeats.index(i)][0].isdigit()==True:
                 splitlist=i.split('-')
                 #print splitlist
-                #print "Under splitlist"
+                print "Under splitlist"
                 if splitlist[1].isdigit()==True:
-                    #print "Ekhane dhuklo"
-                    if compressed[int(splitlist[0]):int(splitlist[1])].isalpha()==True:
-                        #print "Now here"
+                    print "Ekhane dhuklo"
+                    #print decompressed[int(splitlist[0]):int(splitlist[1])]
+                    if decompressed[int(splitlist[0]):int(splitlist[1])-1].isalpha()==True:
+                        print "Now here"
                         #print splitlist[1]
-                        concat=compressed[int(splitlist[0]):int(splitlist[1])]
-                        if repeats[repeats.index(i)].isalpha()==True:
-                            decompressed=repeats[repeats.index(i)]+concat
+                        concat=decompressed[int(splitlist[0]):int(splitlist[1])]
+                        print repeats[repeats.index(i)-1]
+                        print "Concat is "+concat
+                        if concat.isalpha()==True:
+                            print "here here"
+                            decompressed=repeats[repeats.index(i)-1]+concat
+                            print decompressed
                     else:
                         decompressed=("?"*(int(splitlist[1])-int(splitlist[0])+1))
                 else:
@@ -28,9 +33,9 @@ class RepeatedSubstrings():
                         else:
                             break
                     #print temp
-                    if compressed[int(splitlist[0]):int(temp)].isalpha()==True:
+                    if decompressed[int(splitlist[0]):int(temp)].isalpha()==True:
                         #print "Oh achha ekhane"
-                        concat=compressed[int(splitlist[0]):int(temp)]
+                        concat=decompressed[int(splitlist[0]):int(temp)]
                         if repeats[repeats.index(i)].isalpha()==True:
                             decompressed=repeats[repeats.index(i)]+concat
                     else:
@@ -39,5 +44,5 @@ class RepeatedSubstrings():
                     temp=""
             else:
                 decompressed=repeats[repeats.index(i)]
-            decom=decom+decompressed                
-        return decom
+            #decom=decom+decompressed                
+        return decompressed
